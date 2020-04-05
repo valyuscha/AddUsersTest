@@ -115,7 +115,7 @@ export const LanguageWrapper = styled.div`
   text-align: right;
   margin-left: 20px;  
   border: 1px solid white;
-  border-radius: 10px;    
+  border-radius: 10px;   
   background: url(${
   p => p.selectedLanguage === 'EN'
     ? enImg
@@ -137,6 +137,7 @@ export const LanguageSelect = styled.select`
   border: 5px solid ${blue};
   border-radius: 7px;
   background: rgba(0, 0, 0, .3);
+  cursor: pointer; 
   
   &:after {
     color: ${white};

@@ -34,7 +34,7 @@ export default {
   phonePlaceholder: 'Your phone',
   uploadLabel: 'Upload',
   uploadPlaceholder: 'Upload photo',
-  enter_fields: 'If you want to Register new user you have to enter all fields',
+  enter_fields: 'If you want to Register a new user you have to enter all fields',
   successfully_registered: 'New user successfully registered',
   registered_with_error: 'Error: Network Error',
   select_position :'Select your position',

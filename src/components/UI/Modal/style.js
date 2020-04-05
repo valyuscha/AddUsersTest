@@ -54,4 +54,5 @@ export const ModalWindowBottomButton = styled.button`
   font-weight: bold;
   margin-top: 50px;
   outline: none;
+  cursor: pointer;
 `

@@ -133,6 +133,7 @@ export const Select = styled.select`
   position: relative;
   background: transparent;
   appearance: none;
+  cursor: pointer; 
   
   &:after {
     color: ${white};
