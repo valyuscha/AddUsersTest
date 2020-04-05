@@ -1,0 +1,18 @@
+export const GET_HEADER_USER = 'GET_HEADER_USER'
+export const MENU_OPEN = 'MENU_OPEN'
+export const MENU_CLOSE = 'MENU_CLOSE'
+export const SELECTED_LANGUAGE = 'SELECTED_LANGUAGE'
+
+export const GET_ALL_USERS = 'GET_ALL_USERS'
+export const SHOW_USERS = 'SHOW_USERS'
+export const HIDE_USERS = 'HIDE_USERS'
+export const SHOW_BUTTON = 'SHOW_BUTTON'
+export const HIDE_BUTTON = 'HIDE_BUTTON'
+
+export const SUCCESS_MESSAGE = 'SEND_FORM'
+export const ERROR_MESSAGE = 'ERROR_MESSAGE'
+export const ENTER_FIELDS_MESSAGE = 'ENTER_FIELDS_MESSAGE'
+export const GET_TOKEN = 'GET_TOKEN'
+export const MODAL_OPEN = 'MODAL_OPEN'
+export const MODAL_CLOSE = 'MODAL_CLOSE'
+export const GET_SELECT_VALUE = 'GET_SELECT_VALUE'
