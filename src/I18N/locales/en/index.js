@@ -59,5 +59,15 @@ export default {
   footer_center_links_faq: 'FAQ',
   footer_center_links_terms: 'Terms',
   footer_center_links_conditions: 'Conditions',
-  footer_center_links_help: 'Help'
+  footer_center_links_help: 'Help',
+  write_name_error: 'You must enter your name',
+  name_size: 'Name must include from 2 to 60 letters',
+  write_email_error: 'You must enter your email',
+  no_correct_email: 'Enter correct email',
+  write_phone_error: 'You must enter your phone number',
+  no_correct_phone: 'Enter phone number in +380XXXXXXXXX',
+  photo_type_error: 'The photo must have jpeg or jpg format',
+  no_correct_size: 'The size of photo must be less than 5 MB',
+  no_correct_width_height: 'The size of photo must be no less than 70 * 70',
+  select_error: 'You must select your position'
 }

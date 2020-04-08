@@ -138,24 +138,24 @@ class RegisterUsers extends Component {
       case 'name':
         errorMessage.name =
           value.trim().length < 1
-            ? 'You must enter your name'
+            ? 'write_name_error'
             : value.trim().length < 2 || value.length > 60
-            ? 'Name must include from 2 to 60 letters'
+            ? 'name_size'
             : ''
         break
       case 'email':
         errorMessage.email =
           value.trim().length < 1
-            ? 'You must enter your email'
+            ? 'write_email_error'
             : validateEmail(value.trim()) ? ''
-            : 'Enter correct email'
+            : 'no_correct_email'
         break
       case 'phone':
         errorMessage.phone =
           value.trim().length < 1
-            ? 'You must enter your phone number'
+            ? 'write_phone_error'
             : regexNumber.test(value) ? ''
-            : 'Enter phone number in +380XXXXXXXXX'
+            : 'no_correct_phone'
         break
       case 'select':
         errorMessage.select = ''
@@ -163,9 +163,9 @@ class RegisterUsers extends Component {
       case 'file':
         errorMessage.file =
           (ext.toLowerCase() === 'jpeg' || ext.toLowerCase() === 'jpg'
-            ? '' : 'The photo must have jpeg or jpg format') ||
-          (event.target.files[0].size > 5242880 ? 'The size of photo must be less than 5 MB' : '') ||
-          (event.target.files[0].size < 70 * 70 ? 'The size of photo must be less than 70 * 70' : '')
+            ? '' : 'photo_type_error') ||
+          (event.target.files[0].size > 5242880 ? 'no_correct_size' : '') ||
+          (event.target.files[0].size < 70 * 70 ? 'no_correct_width_height' : '')
         break
       default:
         break
@@ -238,9 +238,10 @@ class RegisterUsers extends Component {
   isSelectTouched = (e) => {
     const formControls = {...this.state.formControls}
     let errorMessage = {...this.state.errorMessage}
+    formControls.select.touched = false
     if (e.target.name === 'select') {
       if (!formControls.select.selected) {
-        errorMessage.select = 'You must select your position'
+        errorMessage.select = 'select_error'
       }
     }
 
@@ -258,8 +259,8 @@ class RegisterUsers extends Component {
   }
 
   render() {
-    const {errorMessage} = this.state
-    const {modalSuccessMessage, modalErrorMessage, modalEnterFieldsMessage} = this.props
+    const {errorMessage, isFormValid} = this.state
+    const {modalSuccessMessage, modalErrorMessage, modalEnterFieldsMessage, intl, isModalOpen, modalClose} = this.props
     const {name, email, phone, select, file} = this.state.formControls
 
     return (
@@ -269,13 +270,13 @@ class RegisterUsers extends Component {
           ? this.isTouched() : null}>
         <Container id="FormValidation">
           {
-            this.props.isModalOpen &&
+            isModalOpen &&
             <Modal
               successMessage={modalSuccessMessage}
               errorMessage={modalErrorMessage}
               modalEnterFieldsMessage={modalEnterFieldsMessage}
               button="OK"
-              onClick={this.props.modalClose}
+              onClick={modalClose}
             />
           }
           <FormName>
@@ -311,11 +312,15 @@ class RegisterUsers extends Component {
                 valid={errorMessage.name}
                 touched={name.touched}
                 shouldValidate={!!name.validation}
-                placeholder={this.props.intl.formatMessage({id: 'namePlaceholder'})}
+                placeholder={intl.formatMessage({id: 'namePlaceholder'})}
                 onChange={this.onChangeHandler}
               />
               {!name.touched ? null : errorMessage.name ?
-                <ErrorMessage>{errorMessage.name}</ErrorMessage> : null}
+                <ErrorMessage>
+                  <FormattedMessage
+                    id={errorMessage.name}
+                  />
+                </ErrorMessage> : null}
             </FormFieldWrapper>
 
             <FormFieldWrapper>
@@ -336,11 +341,15 @@ class RegisterUsers extends Component {
                 valid={errorMessage.email}
                 touched={email.touched}
                 shouldValidate={!!email.validation}
-                placeholder={this.props.intl.formatMessage({id: 'emailPlaceholder'})}
+                placeholder={intl.formatMessage({id: 'emailPlaceholder'})}
                 onChange={this.onChangeHandler}
               />
               {!email.touched ? null : errorMessage.email ?
-                <ErrorMessage>{errorMessage.email}</ErrorMessage> : null}
+                <ErrorMessage>
+                  <FormattedMessage
+                    id={errorMessage.email}
+                  />
+                </ErrorMessage> : null}
             </FormFieldWrapper>
 
             <FormFieldWrapper>
@@ -361,11 +370,15 @@ class RegisterUsers extends Component {
                 valid={errorMessage.phone}
                 touched={phone.touched}
                 shouldValidate={!!phone.validation}
-                placeholder={this.props.intl.formatMessage({id: 'phonePlaceholder'})}
+                placeholder={intl.formatMessage({id: 'phonePlaceholder'})}
                 onChange={this.onChangeHandler}
               />
               {!phone.touched ? null : errorMessage.phone ?
-                <ErrorMessage>{errorMessage.phone}</ErrorMessage> : null}
+                <ErrorMessage>
+                  <FormattedMessage
+                    id={errorMessage.phone}
+                  />
+                </ErrorMessage> : null}
             </FormFieldWrapper>
             <SelectWrapper>
               <Select
@@ -379,7 +392,7 @@ class RegisterUsers extends Component {
                 onChange={this.onChangeHandler}
               >
                 <Options disabled value="Select your position">
-                  {this.props.intl.formatMessage({id: 'select_position', defaultMessage: "Select your position"})}
+                  {intl.formatMessage({id: 'select_position', defaultMessage: "Select your position"})}
                 </Options>
 
                 {
@@ -390,7 +403,7 @@ class RegisterUsers extends Component {
                           key={positions.id}
                           value={positions.id}
                         >
-                          {this.props.intl.formatMessage({id: positions.name, defaultMessage: "Select your position"})}
+                          {intl.formatMessage({id: positions.name, defaultMessage: "Select your position"})}
                         </Options>
                       )
                     })
@@ -398,7 +411,11 @@ class RegisterUsers extends Component {
                 }
               </Select>
               {!select.touched ? null : errorMessage.select ?
-                <ErrorMessage>{errorMessage.select}</ErrorMessage> : null}
+                <ErrorMessage>
+                  <FormattedMessage
+                    id={errorMessage.select}
+                  />
+                </ErrorMessage> : null}
             </SelectWrapper>
 
             <Upload>
@@ -419,7 +436,7 @@ class RegisterUsers extends Component {
                   valid={errorMessage.file}
                   disabled
                   onChange={this.onChangeHandler}
-                  placeholder={this.props.intl.formatMessage({id: 'uploadPlaceholder'})}
+                  placeholder={intl.formatMessage({id: 'uploadPlaceholder'})}
                 />
                 <UploadLabel htmlFor="file-input">
                   <FormattedMessage
@@ -431,13 +448,20 @@ class RegisterUsers extends Component {
                   <UploadLabelMiniImg/>
                 </UploadLabelMini>
               </UploadWrapper>
-              {errorMessage.file && <ErrorMessage>{errorMessage.file}</ErrorMessage>}
+              {
+                errorMessage.file &&
+                <ErrorMessage>
+                  <FormattedMessage
+                    id={errorMessage.file}
+                  />
+                </ErrorMessage>
+              }
             </Upload>
 
             <Button
               text="sign_up"
-              registration={this.state.isFormValid}
-              onClick={this.state.isFormValid
+              registration={isFormValid}
+              onClick={isFormValid
                 ? this.sendForm
                 : this.enterFields}
             />

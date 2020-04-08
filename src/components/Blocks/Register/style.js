@@ -164,6 +164,7 @@ export const Upload = styled.div`
   
   @media screen and (max-width: 768px) {
     margin: 35px auto 0;
+    width: 288px;
   }
 `
 
@@ -198,7 +199,7 @@ export const UploadInputFile = styled.input`
 export const UploadInput = styled.input`
   font-size: 16px;
   box-sizing: border-box;
-  padding: 19px 135px 19px 18px;
+  padding: 19px 183px 19px 18px;
   border: 1px solid ${inputgrey};
   border-radius: 4px;
   outline: none;

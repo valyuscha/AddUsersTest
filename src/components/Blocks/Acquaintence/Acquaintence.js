@@ -17,12 +17,14 @@ import {
 } from './style'
 
 const Acquaintence = ({id}) => {
+  const {acquainted, developer, slow_experience, improve} = content
+
   return (
     <Container id={id}>
       <AcquaintenceName>
         <FormattedMessage
-          id={content.acquainted.id}
-          defaultMessage={content.acquainted.defaultMessage}
+          id={acquainted.id}
+          defaultMessage={acquainted.defaultMessage}
         />
       </AcquaintenceName>
       <AcquaintenceRow>
@@ -32,20 +34,20 @@ const Acquaintence = ({id}) => {
         <AcquaintenceTextWrapper>
           <AcquaintenceTextName>
             <FormattedMessage
-              id={content.developer.id}
-              defaultMessage={content.developer.defaultMessage}
+              id={developer.id}
+              defaultMessage={developer.defaultMessage}
             />
           </AcquaintenceTextName>
           <AcquaintenceText>
             <FormattedMessage
-              id={content.slow_experience.id}
-              defaultMessage={content.slow_experience.defaultMessage}
+              id={slow_experience.id}
+              defaultMessage={slow_experience.defaultMessage}
             />
           </AcquaintenceText>
           <AcquaintenceText>
             <FormattedMessage
-              id={content.improve.id}
-              defaultMessage={content.improve.defaultMessage}
+              id={improve.id}
+              defaultMessage={improve.defaultMessage}
             />
           </AcquaintenceText>
           <Link

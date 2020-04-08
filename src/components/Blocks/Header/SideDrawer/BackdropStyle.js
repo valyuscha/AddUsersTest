@@ -7,6 +7,6 @@ export const SideDrawerBlackBack = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
+  z-index: 10;
   cursor: pointer;
 `

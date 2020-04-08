@@ -14,7 +14,7 @@ export const HeaderTop = styled.div`
     background: ${white};
     color: ${black};
     width: 100%;
-    z-index: 9999;
+    z-index: 1;
 `
 
 export const HeaderTopContainer = styled.div`
@@ -102,6 +102,8 @@ export const UserImageWrapper = styled.div`
     width: 40px;
     text-align: center;
     margin-left: 10px;
+    position: relative;
+    z-index: 1;
 `
 
 export const UserImage = styled.img.attrs(() => ({
@@ -112,7 +114,8 @@ export const UserImage = styled.img.attrs(() => ({
 `
 
 export const LanguageWrapper = styled.div`
-  text-align: right;
+  width: 48px;
+  height: 45px;
   margin-left: 20px;  
   border: 1px solid white;
   border-radius: 10px;   
@@ -127,28 +130,89 @@ export const LanguageWrapper = styled.div`
   }) no-repeat 50% 50%/cover;   
 `
 
-export const LanguageSelect = styled.select`
-  appearance: none;
-  outline: none;
-  padding: 5px;
-  color: ${white};
-  font-weight: 800;
-  font-size: 18px;
+export const SelectedLanguageWrapper = styled.div`
+  margin-bottom: 3px;
+  width: 48px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
   border: 5px solid ${blue};
   border-radius: 7px;
   background: rgba(0, 0, 0, .3);
   cursor: pointer; 
-  
-  &:after {
-    color: ${white};
-  }
+  position: relative;
+  z-index: 3;
+  background: url(${
+  p => p.lang === 'EN'
+    ? enImg
+    : p.lang === 'RU'
+      ? ruImg
+      : p.lang === 'UA'
+        ? uaImg
+        : enImg
+  }) no-repeat 50% 50%/cover;
 `
 
-export const LanguageOption = styled.option`
+export const SelectedLanguage = styled.button`
+  width: 48px;
+  height: 38px;
+  border: none;
+  background: rgba(0, 0, 0, .3);
+  outline: none;
+  color: ${white};
+  font-weight: 800;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+`
+
+export const LanguageLayout = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+`
+
+export const LanguageButtonsList = styled.div`
+  width: 48px;
+  box-sizing: border-box;
+  border: 5px solid ${blue};
+  border-radius: 5px;
+  position: relative;
+  z-index: 3;
+`
+
+export const LanguageButtonsWrapper = styled.div`
+  width: 38px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer; 
+`
+
+export const LanguageButtons = styled.button`
+  width: 38px;
+  height: 38px;
+  margin: 0 auto;
   background: aqua;
-  border: 1px solid ${white};
-  border-radius: 10px;
+  outline: none;
   color: ${black};
+  border: none;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  
+  &:hover {
+    background: ${blue};
+    color: ${white};
+  }
 `
 
 export const DrawerToggleButtonWrapper = styled.div`

@@ -18,12 +18,12 @@ import Footer from '../Footer'
 const local = navigator.language
 let lang
 
-const App = (props) => {
-  if (props.selectedLanguage === 'EN') {
+const App = ({selectedLanguage}) => {
+  if (selectedLanguage === 'EN') {
     lang = en
-  } else if (props.selectedLanguage === 'RU') {
+  } else if (selectedLanguage === 'RU') {
     lang = ru
-  } else if (props.selectedLanguage === 'UA') {
+  } else if (selectedLanguage === 'UA') {
     lang = ua
   } else {
     lang = en

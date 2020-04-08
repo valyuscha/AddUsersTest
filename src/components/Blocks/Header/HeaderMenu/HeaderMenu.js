@@ -2,7 +2,12 @@ import React, {Component} from 'react'
 import {Link, animateScroll as scroll} from "react-scroll"
 import {connect} from 'react-redux'
 import {getToken} from '../../../../redux/actions/registerActions'
-import {getHeaderUser, getSelectedLanguage} from '../../../../redux/actions/headerMenuActions'
+import {
+  closeLanguagesList,
+  getHeaderUser,
+  getSelectedLanguage,
+  showLanguagesList
+} from '../../../../redux/actions/headerMenuActions'
 import {FormattedMessage} from 'react-intl'
 
 import {Container} from '../../App/style'
@@ -24,8 +29,12 @@ import {
   UserImageWrapper,
   UserImage,
   LanguageWrapper,
-  LanguageSelect,
-  LanguageOption,
+  SelectedLanguageWrapper,
+  LanguageButtonsList,
+  LanguageButtonsWrapper,
+  LanguageButtons,
+  SelectedLanguage,
+  LanguageLayout,
   DrawerToggleButtonWrapper
 } from './style'
 
@@ -40,7 +49,7 @@ class HeaderMenu extends Component {
   }
 
   render() {
-    const {user} = this.props
+    const {user, selectedLanguage, isSelected, getSelectedLanguage, closeLanguagesList, drawerToggleClickHandler, showLanguagesList} = this.props
 
     return (
       <HeaderTop>
@@ -82,27 +91,42 @@ class HeaderMenu extends Component {
                 <UserImageWrapper>
                   <UserImage src={user.photo}/>
                 </UserImageWrapper>
-                <LanguageWrapper selectedLanguage={this.props.selectedLanguage}>
-                  <LanguageSelect
-                    onClick={e => this.props.getSelectedLanguage(e)}
+                <LanguageWrapper>
+                  <SelectedLanguageWrapper
+                    lang={selectedLanguage}
+                    onClick={showLanguagesList}
                   >
-                    {
-                      languages.map(item => {
-                        return (
-                          <LanguageOption
-                            key={item.id}
-                          >
-                            {item.name}
-                          </LanguageOption>
-                        )
-                      })
-                    }
-                  </LanguageSelect>
+                    <SelectedLanguage>
+                      {selectedLanguage}
+                    </SelectedLanguage>
+                  </SelectedLanguageWrapper>
+                  { isSelected &&
+                  <>
+                    <LanguageButtonsList>
+                      {
+                        languages.map(item => {
+                          return (
+                            <LanguageButtonsWrapper
+                              key={item.id}
+                              name={item.name}
+                              onClick={() => getSelectedLanguage(item.name)}
+                            >
+                              <LanguageButtons>
+                                {item.name}
+                              </LanguageButtons>
+                            </LanguageButtonsWrapper>
+                          )
+                        })
+                      }
+                    </LanguageButtonsList>
+                    <LanguageLayout onClick={closeLanguagesList} />
+                  </>
+                  }
                 </LanguageWrapper>
               </Authorisation>
             </HeaderList>
             <DrawerToggleButtonWrapper>
-              <DrawerToggleButton onClick={this.props.drawerToggleClickHandler}/>
+              <DrawerToggleButton onClick={drawerToggleClickHandler}/>
             </DrawerToggleButtonWrapper>
           </HeaderTopContainer>
         </Container>
@@ -114,7 +138,8 @@ class HeaderMenu extends Component {
 const mapStateToProps = state => {
   return {
     user: state.headerMenu.user,
-    selectedLanguage: state.headerMenu.selectedLanguage
+    selectedLanguage: state.headerMenu.selectedLanguage,
+    isSelected: state.headerMenu.isSelected
   }
 }
 
@@ -122,7 +147,9 @@ const mapDispatchToProps = dispatch => {
   return {
     axiosUser: () => dispatch(getHeaderUser()),
     getSelectedLanguage: (event) => dispatch(getSelectedLanguage(event)),
-    getToken: () => dispatch(getToken())
+    getToken: () => dispatch(getToken()),
+    showLanguagesList: () => dispatch(showLanguagesList()),
+    closeLanguagesList: () => dispatch(closeLanguagesList())
   }
 }
 

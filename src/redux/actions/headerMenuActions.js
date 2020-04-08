@@ -2,8 +2,10 @@ import axios from 'axios'
 import {
   GET_HEADER_USER,
   MENU_CLOSE,
+  SELECTED_LANGUAGE,
   MENU_OPEN,
-  SELECTED_LANGUAGE
+  OPEN_LANGUAGE_LIST,
+  CLOSE_LANGUAGE_LIST
 } from './actionTypes'
 
 export function getHeaderUser() {
@@ -26,10 +28,21 @@ export function menuClose() {
   }
 }
 
-export function getSelectedLanguage(event) {
-  const selected = event.target.value
+export function getSelectedLanguage(name) {
   return {
     type: SELECTED_LANGUAGE,
-    payload: selected
+    payload: name
+  }
+}
+
+export function showLanguagesList() {
+  return {
+    type: OPEN_LANGUAGE_LIST
+  }
+}
+
+export function closeLanguagesList() {
+  return {
+    type: CLOSE_LANGUAGE_LIST
   }
 }

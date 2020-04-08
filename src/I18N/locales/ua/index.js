@@ -59,5 +59,15 @@ export default {
   footer_center_links_faq: 'FAQ',
   footer_center_links_terms: 'Стосунки',
   footer_center_links_conditions: 'Умови',
-  footer_center_links_help: 'Допомога'
+  footer_center_links_help: 'Допомога',
+  write_name_error: 'Ви маєте заповнити це поле',
+  name_size: 'Ім\'я повинно мати від 2 до 60 літер',
+  write_email_error: 'Ви маєте заповнити це поле',
+  no_correct_email: 'Ця єлектронна пошта не є коректною',
+  write_phone_error: 'Ви маєте заповнити це поле',
+  no_correct_phone: 'Введіть номер телефону у форматі +380XXXXXXXXX',
+  photo_type_error: 'Фото повинно бути у jpeg або jpg форматі',
+  no_correct_size: 'Фото має бути не меньше 5 MB',
+  no_correct_width_height: 'Фото має бути не меньше 70 * 70',
+  select_error: 'Ви маєте вибрати свій напрямок'
 }

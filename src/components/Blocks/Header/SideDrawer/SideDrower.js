@@ -2,7 +2,12 @@ import React, {Component} from 'react'
 import {Link} from 'react-scroll'
 import {connect} from 'react-redux'
 import {FormattedMessage} from 'react-intl'
-import {getHeaderUser, getSelectedLanguage} from '../../../../redux/actions/headerMenuActions'
+import {
+  closeLanguagesList,
+  getHeaderUser,
+  getSelectedLanguage,
+  showLanguagesList
+} from '../../../../redux/actions/headerMenuActions'
 
 import {headerLinks, languages} from '../server'
 
@@ -19,8 +24,12 @@ import {
   ListItem,
   ListItemLink,
   LanguageWrapper,
-  LanguageSelect,
-  LanguageOption
+  SelectedLanguageWrapper,
+  LanguageButtonsList,
+  LanguageButtonsWrapper,
+  LanguageButtons,
+  SelectedLanguage,
+  LanguageLayout,
 } from './SideDrowerStyle'
 
 class SideDrawer extends Component {
@@ -29,7 +38,7 @@ class SideDrawer extends Component {
   }
 
   render() {
-    const {user} = this.props
+    const {user, selectedLanguage, isSelected, getSelectedLanguage, closeLanguagesList, showLanguagesList} = this.props
 
     return (
       <SideDrawerWrapper show={this.props.show}>
@@ -43,22 +52,37 @@ class SideDrawer extends Component {
               <UserEmail>{user.email}</UserEmail>
             </UserData>
           </UserWrapper>
-          <LanguageWrapper selectedLanguage={this.props.selectedLanguage}>
-            <LanguageSelect
-              onClick={e => this.props.getSelectedLanguage(e)}
+          <LanguageWrapper>
+            <SelectedLanguageWrapper
+              lang={selectedLanguage}
+              onClick={showLanguagesList}
             >
-              {
-                languages.map(item => {
-                  return (
-                    <LanguageOption
-                      key={item.id}
-                    >
-                      {item.name}
-                    </LanguageOption>
-                  )
-                })
-              }
-            </LanguageSelect>
+              <SelectedLanguage>
+                {selectedLanguage}
+              </SelectedLanguage>
+            </SelectedLanguageWrapper>
+            { isSelected &&
+            <>
+              <LanguageButtonsList>
+                {
+                  languages.map(item => {
+                    return (
+                      <LanguageButtonsWrapper
+                        key={item.id}
+                        name={item.name}
+                        onClick={() => getSelectedLanguage(item.name)}
+                      >
+                        <LanguageButtons>
+                          {item.name}
+                        </LanguageButtons>
+                      </LanguageButtonsWrapper>
+                    )
+                  })
+                }
+              </LanguageButtonsList>
+              <LanguageLayout onClick={closeLanguagesList} />
+            </>
+            }
           </LanguageWrapper>
         </UserLanguageWrapper>
         <Menu>
@@ -93,14 +117,17 @@ class SideDrawer extends Component {
 const mapStateToProps = state => {
   return {
     user: state.headerMenu.user,
-    selectedLanguage: state.headerMenu.selectedLanguage
+    selectedLanguage: state.headerMenu.selectedLanguage,
+    isSelected: state.headerMenu.isSelected
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     axiosUser: () => dispatch(getHeaderUser()),
-    getSelectedLanguage: (event) => dispatch(getSelectedLanguage(event))
+    getSelectedLanguage: (event) => dispatch(getSelectedLanguage(event)),
+    showLanguagesList: () => dispatch(showLanguagesList()),
+    closeLanguagesList: () => dispatch(closeLanguagesList())
   }
 }
 

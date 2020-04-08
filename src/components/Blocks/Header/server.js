@@ -7,7 +7,7 @@ export const headerLinks = [
   {id: 6, name: 'footer', defaultMessage: 'Footer', link: 'Footer'}
 ]
 
-export  const languages = [
+export const languages = [
   {id: 1, name: 'EN'},
   {id: 2, name: 'RU'},
   {id: 3, name: 'UA'}

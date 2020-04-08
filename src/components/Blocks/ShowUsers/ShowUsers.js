@@ -29,7 +29,9 @@ class ShowUsers extends Component {
   }
 
   renderUser = () => {
-    if (!this.props.users.length) {
+    const {users} = this.props
+
+    if (!users.length) {
       return (
         <Loader
           type="TailSpin"
@@ -41,7 +43,7 @@ class ShowUsers extends Component {
       )
     }
 
-    const translateUsers = this.props.users.map(user => {
+    const translateUsers = users.map(user => {
       let userPosition
 
       switch (user.position) {
@@ -99,6 +101,8 @@ class ShowUsers extends Component {
   }
 
   render() {
+    const {isShowButton, isShowUsers, axiosUsers} = this.props
+
     return (
       <Container id="ShowUsers">
         <ShowUsersWrapper>
@@ -118,11 +122,11 @@ class ShowUsers extends Component {
             {this.renderUser()}
           </ShowUsersItemsWrapper>
           {
-            this.props.isShowButton &&
+            isShowButton &&
             <Button
               users
               text="more_users"
-              onClick={this.props.isShowUsers ? this.props.axiosUsers : null}
+              onClick={isShowUsers ? axiosUsers : null}
             />
           }
         </ShowUsersWrapper>

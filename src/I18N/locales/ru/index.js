@@ -59,5 +59,15 @@ export default {
   footer_center_links_faq: 'FAQ',
   footer_center_links_terms: 'Гонорар',
   footer_center_links_conditions: 'Условия',
-  footer_center_links_help: 'Помощь'
+  footer_center_links_help: 'Помощь',
+  write_name_error: 'Это поле должно быть заполненым',
+  name_size: 'Имя должно быть от 2 до 60 букв',
+  write_email_error: 'Это поле должно быть заполненым',
+  no_correct_email: 'Введите корректный электронный адрес',
+  write_phone_error: 'Это поле должно быть заполненым',
+  no_correct_phone: 'Введите номер телефона в формате +380XXXXXXXXX',
+  photo_type_error: 'Фото должно быть в jpeg или jpg формате',
+  no_correct_size: 'Размер фотографии должен быть не менее 5 MB',
+  no_correct_width_height: 'Размер фотографии должен быть не менее 70 * 70',
+  select_error: 'Вы должны выбрать своё направление'
 }

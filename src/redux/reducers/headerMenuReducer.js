@@ -2,13 +2,16 @@ import {
   GET_HEADER_USER,
   MENU_CLOSE,
   MENU_OPEN,
-  SELECTED_LANGUAGE
+  SELECTED_LANGUAGE,
+  OPEN_LANGUAGE_LIST,
+  CLOSE_LANGUAGE_LIST
 } from '../actions/actionTypes'
 
 const initialState = {
   user: {},
   menuOpen: false,
-  selectedLanguage: ''
+  selectedLanguage: 'EN',
+  isSelected: false
 }
 
 export function headerMenuReducer(state = initialState, action) {
@@ -20,7 +23,11 @@ export function headerMenuReducer(state = initialState, action) {
     case MENU_CLOSE:
       return {...state, menuOpen: false}
     case SELECTED_LANGUAGE:
-      return {...state, selectedLanguage: action.payload}
+      return {...state, selectedLanguage: action.payload, isSelected: false}
+    case OPEN_LANGUAGE_LIST:
+      return {...state, isSelected: !state.isSelected}
+    case CLOSE_LANGUAGE_LIST:
+      return {...state, isSelected: false}
     default:
       return state
   }
